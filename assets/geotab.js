@@ -37,7 +37,14 @@ geotab.addin.fleetPulse = () => {
                 console.log("Session ",result.sessionId);
                 console.log("Session ",result.userName);
                 console.log("Session ",result.database);
-                window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });  
+                var intervalId = setInterval(() => {
+                    if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
+                        window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });      
+                        clearInterval(intervalId);
+                    }else{
+                        console.log("fleetPulse app not ready yet, checking again");
+                    }
+                },500)
             }); 
         };
          
