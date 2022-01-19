@@ -7,6 +7,7 @@ geotab.addin.fleetPulse = () => {
   /* Scope variables */
   let api; // Ref https://github.com/Geotab/mg-api-js
   let state;
+  let angularAppInitCheckInterval;
 
   /**
    * Initialize the add-in
@@ -15,6 +16,29 @@ geotab.addin.fleetPulse = () => {
       this.title = "fleetPulse Initialized"
       console.log(this.title);
   };
+
+    /**
+    * Clears Angular Init check interval
+    */
+    let clearAngularAppinitCheck = () => {
+        clearInterval(angularAppInitCheckInterval);
+    };
+
+    let onAppStart = () => {        
+        api.getSession((result) => {
+            console.log("Session ",result.sessionId);
+            console.log("Session ",result.userName);
+            console.log("Session ",result.database);
+            angularAppInitCheckInterval = setInterval(() => {
+                if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
+                    window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });
+                    clearAngularAppinitCheck();
+                }else{
+                    console.log("fleetPulse app not ready yet, checking again");
+                }
+            },500)
+        }); 
+    };
 
   /**
   * Render
@@ -32,23 +56,7 @@ geotab.addin.fleetPulse = () => {
         // }, function (err) {
         //     console.error("USERS ERR ",err);
         // });
-        const startApplication = () => {        
-            api.getSession(function (result) {
-                console.log("Session ",result.sessionId);
-                console.log("Session ",result.userName);
-                console.log("Session ",result.database);
-                var intervalId = setInterval(() => {
-                    if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
-                        window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });      
-                        clearInterval(intervalId);
-                    }else{
-                        console.log("fleetPulse app not ready yet, checking again");
-                    }
-                },500)
-            }); 
-        };
-         
-        startApplication();
+        onAppStart();
   }
 
   /**
