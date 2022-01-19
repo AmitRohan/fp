@@ -12,7 +12,7 @@ geotab.addin.fleetPulse = () => {
    * Initialize the add-in
    */
   let initialize = () => {
-      this.title = "Code Base Initialized"
+      this.title = "fleetPulse Initialized"
       console.log(this.title);
   };
 
@@ -21,7 +21,7 @@ geotab.addin.fleetPulse = () => {
   * App Logic
   */
   let render = () => {
-        this.title ="Code Base Rendered";
+        this.title ="fleetPulse Rendered";
         console.log(this.title);
         // api.call('Get', {
         //     typeName: 'User'
@@ -37,7 +37,7 @@ geotab.addin.fleetPulse = () => {
                 console.log("Session ",result.sessionId);
                 console.log("Session ",result.userName);
                 console.log("Session ",result.database);
-                window.myGeoKruzrNgAppRef.zone.run(() => { window.myGeoKruzrNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });  
+                window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });  
             }); 
         };
          
@@ -48,7 +48,7 @@ geotab.addin.fleetPulse = () => {
    * Aborts
    */
   let abort = () => {
-      this.title ="Code Base Aborted";
+      this.title ="fleetPulse Aborted";
       console.log(this.title);
   };
 
@@ -76,7 +76,6 @@ geotab.addin.fleetPulse = () => {
       * been modified since it was first initialized.
       */
       focus(freshApi, freshState) {
-          console.log("Back In AddIn");
           api = freshApi;
           state = freshState;
 
@@ -88,7 +87,6 @@ geotab.addin.fleetPulse = () => {
       * Use this function to save state or commit changes to a datastore or release memory.
       */
       blur() {
-          console.log("Left AddIn");
           abort();
       }
   };
