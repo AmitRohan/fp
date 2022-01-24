@@ -13,8 +13,8 @@ geotab.addin.fleetPulse = () => {
      * Initialize the add-in
      */
     let initialize = () => {
-        title = "fleetPulse Initialized"
-        console.log(title);
+        this.title = "fleetPulse Initialized"
+        console.log(this.title);
     };
   
       /**
@@ -45,8 +45,8 @@ geotab.addin.fleetPulse = () => {
     * App Logic
     */
     let render = () => {
-          title ="fleetPulse Rendered";
-          console.log(title);
+          this.title ="fleetPulse Rendered";
+          console.log(this.title);
           // api.call('Get', {
           //     typeName: 'User'
           // }, function (result) {
@@ -63,8 +63,9 @@ geotab.addin.fleetPulse = () => {
      * Aborts
      */
     let abort = () => {
-        title ="fleetPulse Aborted";
-        console.log(title);
+        this.title ="fleetPulse Aborted";
+        console.log(this.title);
+        this.clearAngularAppinitCheck();
     };
   
     return {
