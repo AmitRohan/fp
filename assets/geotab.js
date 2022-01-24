@@ -64,6 +64,7 @@ geotab.addin.fleetPulse = () => {
    */
   let abort = () => {
       this.title ="fleetPulse Aborted";
+      clearAngularAppinitCheck();
       console.log(this.title);
   };
 
