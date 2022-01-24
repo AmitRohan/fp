@@ -25,9 +25,6 @@ geotab.addin.fleetPulse = () => {
 
     let onAppStart = () => {        
         api.getSession((result) => {
-            console.log("Session ",result.sessionId);
-            console.log("Session ",result.userName);
-            console.log("Session ",result.database);
             angularAppInitCheckInterval = setInterval(() => {
                 if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
                     window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });
