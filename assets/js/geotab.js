@@ -13,58 +13,46 @@ geotab.addin.fleetPulse = () => {
      * Initialize the add-in
      */
     let initialize = () => {
-        this.title = "fleetPulse Initialized"
-        console.log(this.title);
+        console.log("fleetPulse Initialized");
     };
   
-      /**
-      * Clears Angular Init check interval
-      */
-      let clearAngularAppinitCheck = () => {
-          clearInterval(angularAppInitCheckInterval);
-      };
-  
-      let onAppStart = () => {        
-          api.getSession((result) => {
-              console.log("Session ",result.sessionId);
-              console.log("Session ",result.userName);
-              console.log("Session ",result.database);
-              angularAppInitCheckInterval = setInterval(() => {
-                  if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
-                      window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });
-                      clearAngularAppinitCheck();
-                  }else{
-                      console.log("fleetPulse app not ready yet, checking again");
-                  }
-              },500)
-          }); 
-      };
+    /**
+     * Clears Angular Init check interval
+     */
+    let clearAngularAppinitCheck = () => {
+        clearInterval(angularAppInitCheckInterval);
+    };
+
+    let onAppStart = () => {        
+        api.getSession((result) => {
+            console.log("Session ",result.sessionId);
+            console.log("Session ",result.userName);
+            console.log("Session ",result.database);
+            angularAppInitCheckInterval = setInterval(() => {
+                if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
+                    window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });
+                    clearAngularAppinitCheck();
+                }else{
+                    console.log("fleetPulse app not ready yet, checking again");
+                }
+            },500)
+        }); 
+    };
   
     /**
     * Render
     * App Logic
     */
     let render = () => {
-          this.title ="fleetPulse Rendered";
-          console.log(this.title);
-          // api.call('Get', {
-          //     typeName: 'User'
-          // }, function (result) {
-          //     if (result) {
-          //         console.log("USERS Result ",result);
-          //     }
-          // }, function (err) {
-          //     console.error("USERS ERR ",err);
-          // });
-          onAppStart();
+          console.log("fleetPulse Rendered");
+          this.onAppStart();
     }
   
     /**
      * Aborts
      */
     let abort = () => {
-        this.title ="fleetPulse Aborted";
-        console.log(this.title);
+        console.log("fleetPulse Aborted");
         this.clearAngularAppinitCheck();
     };
   
