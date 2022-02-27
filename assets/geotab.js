@@ -24,6 +24,8 @@ geotab.addin.fleetPulse = () => {
     };
   
     let onAppStart = () => {
+        localStorage.setItem("driverData","");
+        localStorage.setItem("tripData","");
       loadFleetPulseRuntime();
       loadFleetPulsePolyfill();
       loadFleetPulseMain();
