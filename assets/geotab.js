@@ -33,7 +33,7 @@ geotab.addin.fleetPulse = () => {
         api.getSession((result) => {
             angularAppInitCheckInterval = setInterval(() => {
                 if(window.myFleetPulseNgAppRef && window.myFleetPulseNgAppRef.zone){
-                    window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.database,result.sessionId,result.database); });
+                    window.myFleetPulseNgAppRef.zone.run(() => { window.myFleetPulseNgAppRef.loadGeoTabSDKData(result.userName,result.sessionId,result.database); });
                     clearAngularAppinitCheck();
                 }else{
                     console.log("FleetPulse app not ready yet, checking again");
