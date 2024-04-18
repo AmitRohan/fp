@@ -34,7 +34,7 @@ geotab.addin.fleetPulse = () => {
             var groupIds = state.getGroupFilter().map(_ => _.id);
             angularAppInitCheckInterval = setInterval(() => {
                 if(window.myNgAppRef && window.myNgAppRef){
-                    window.myNgAppRef.loadGeoTabSDKData(result.userName,result.sessionId,result.database,groupIds);
+                    setTimeout(() => { window.myNgAppRef.loadGeoTabSDKData(result.userName,result.sessionId,result.database,groupIds); } , 500);
                     clearAngularAppinitCheck();
                 }else{
                     console.log("FleetPulse app not ready yet, checking again");
